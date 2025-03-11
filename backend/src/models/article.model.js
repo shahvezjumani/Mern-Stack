@@ -19,7 +19,7 @@ const articleShema = new Schema(
       type: String,
       index: true,
     },
-    user: {
+    owner: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },

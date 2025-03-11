@@ -1,6 +1,7 @@
 import express, { json, urlencoded } from "express";
 import cors from "cors";
 import cookieparser from "cookie-parser";
+import { ApiResponse } from "./utils/ApiResponse.js";
 
 const app = express();
 
@@ -24,13 +25,24 @@ app.use(
 app.use(cookieparser());
 app.use(express.static("public"));
 
+// Global error handler middleware
+// app.use((err, req, res, next) => {
+//   const statusCode = err.statusCode || 500;
+
+//   res.status(statusCode).json({
+//     success: false,
+//     message: err.message || "Internal Server Error",
+//     error: err.error || [],
+//   });
+// });
+
 console.log(process.env.CORS_ORIGIN);
 
 app.get("/api/data", (req, res) => {
-  res.json({
-    message: "This is Shahvez! Responding from backend",
-    success: true,
-  });
+  res.json(new ApiResponse(200, {}, "Hello Shahvez"));
 });
+
+import userRouter from "./routes/user.routes.js";
+app.use("/api/v1/users", userRouter);
 
 export default app;
