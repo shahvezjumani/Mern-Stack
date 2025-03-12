@@ -93,9 +93,9 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 const logoutUser = asyncHandler(async (req, res) => {
-  const  user  = req.user;
+  const user = req.user;
   console.log(`${user}:Ima sdfjkshf`);
-  
+
   if (!user) {
     throw new ApiError("Unauthorized request");
   }
@@ -116,7 +116,6 @@ const logoutUser = asyncHandler(async (req, res) => {
   };
 
   console.log("ok");
-  
 
   return res
     .status(200)
@@ -125,4 +124,19 @@ const logoutUser = asyncHandler(async (req, res) => {
     .json(200, updatedUser, "User LoggedOut Successfully");
 });
 
-export { registerUser, loginUser, logoutUser };
+const getCurrentUser = asyncHandler(async (req, res) => {
+  const user = req.user;
+  if (!user) {
+    throw new ApiError(400, "unAuthorized Request");
+  }
+
+  const fetchedUser = await User.findById(user._id).select(
+    "-password -refreshToken"
+  );
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, fetchedUser, "User fetched Successfully"));
+});
+
+export { registerUser, loginUser, logoutUser, getCurrentUser };

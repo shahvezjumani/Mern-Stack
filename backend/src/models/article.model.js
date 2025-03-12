@@ -15,6 +15,12 @@ const articleShema = new Schema(
       type: String,
       required: true,
     },
+    slug: {
+      type: String,
+      required: true,
+      unique: true, // Ensure the slug is unique
+      index: true,  // Make slug searchable for efficiency
+    },
     status: {
       type: String,
       index: true,

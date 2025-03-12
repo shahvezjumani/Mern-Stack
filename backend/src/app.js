@@ -43,6 +43,8 @@ app.get("/api/data", (req, res) => {
 });
 
 import userRouter from "./routes/user.routes.js";
+import articleRouter from "./routes/article.routes.js";
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/articles", articleRouter);
 
 export default app;
