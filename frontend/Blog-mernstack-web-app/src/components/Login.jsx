@@ -1,24 +1,24 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { login as authLogin } from "../store/authSlice.js";
+import { useDispatch } from "react-redux";
+import { Select, Input, Button, Container, Logo } from "./index.js";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-  const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const { register, handleSubmit } = useForm();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const login = async (data) => {
+    // e.preventDefault();
     try {
-      const res = await axios.post(
+      const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/v1/users/loginUser`,
-        formData,
+        data,
         {
           withCredentials: true, // Send cookies if using sessions
           headers: {
@@ -26,14 +26,20 @@ const Login = () => {
           },
         }
       );
-      setResponse(res.data);
+      //   setResponse(res.data);
       setError(null);
-      setFormData({ email: "", password: "" });
+      dispatch(authLogin(response.data.data));
+      navigate("/");
+      //   setFormData({ email: "", password: "" });
     } catch (err) {
       let errorMessage = "Something went wrong Shahvez";
       if (err.response?.data) {
+        // console.log("error", err);
+        // console.log("error response", err.response);
+
         // Try to extract the error message from the HTML response
         const match = err.response.data.match(/<pre>(.*?)<\/pre>/);
+        // console.log(match[1].replace("Error: ",""));
 
         if (match && match[1]) {
           errorMessage = match[1].trim().replace("Error: ", "");
@@ -41,56 +47,63 @@ const Login = () => {
       }
 
       setError(errorMessage);
-      setResponse(null);
+      //   setResponse(null);
     }
   };
 
   return (
-    <section className="w-screen h-screen bg-zinc-800 flex justify-center items-center">
-      <div>
-        <form
-          action=""
-          className="bg-green-400 p-5 flex flex-col"
-          onSubmit={(e) => handleSubmit(e)}
-        >
-          <div>
-            <input
+    <div className="flex items-center justify-center w-full">
+      <div
+        className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
+      >
+        <div className="mb-2 flex justify-center">
+          <span className="inline-block w-full max-w-[100px]">
+            <Logo width="100%" />
+          </span>
+        </div>
+        <h2 className="text-center text-2xl font-bold leading-tight">
+          Sign in to your account
+        </h2>
+        <p className="mt-2 text-center text-base text-black/60">
+          Don&apos;t have any account?&nbsp;
+          <Link
+            to="/signup"
+            className="font-medium text-primary transition-all duration-200 hover:underline"
+          >
+            Sign Up
+          </Link>
+        </p>
+        {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
+        <form onSubmit={handleSubmit(login)} className="mt-8">
+          <div className="space-y-5">
+            <Input
+              label="Email: "
+              placeholder="Enter your email"
               type="email"
-              value={formData.email}
-              required
-              name="email"
-              className="text-black p-2 m-2"
-              onChange={(e) => handleChange(e)}
-              placeholder="Email"
+              {...register("email", {
+                required: true,
+                validate: {
+                  matchPatern: (value) =>
+                    /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
+                    "Email address must be a valid address",
+                },
+              })}
             />
-          </div>
-          <div>
-            <input
+            <Input
+              label="Password: "
               type="password"
-              name="password"
-              value={formData.password}
-              required
-              className="text-black p-2 m-2"
-              onChange={(e) => handleChange(e)}
-              placeholder="Password"
+              placeholder="Enter your password"
+              {...register("password", {
+                required: true,
+              })}
             />
+            <Button type="submit" className="w-full">
+              Sign in
+            </Button>
           </div>
-          <button type="submit" className="bg-red-400 px-4 py-2 rounded-lg">
-            Login
-          </button>
         </form>
-        {response && (
-          <>
-            <h1 className="text-green-400 mt-4">
-              {response?.message || "User Registered Successfullylllll"}
-            </h1>
-            <h2> {response.data?.userName || ""}</h2>
-          </>
-        )}
-
-        {error && <h1 className="text-red-400 mt-4">{error}</h1>}
       </div>
-    </section>
+    </div>
   );
 };
 

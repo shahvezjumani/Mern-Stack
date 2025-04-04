@@ -8,13 +8,14 @@ import {
 } from "../utils/cloudinary.js";
 
 const validateFields = (fields) => {
-  if (fields.some((field) => field.trim() === "")) {
+  if (fields.some((field) => field?.trim() === "")) {
     throw new ApiError(400, "All fields are required");
   }
 };
 
 const createPost = asyncHandler(async (req, res) => {
   const { title, content, status, slug } = req.body;
+  console.log("I am create check", title, content, status, slug);
 
   validateFields([title, content, status, slug]);
 
@@ -70,10 +71,13 @@ const createPost = asyncHandler(async (req, res) => {
 
 const updatePost = asyncHandler(async (req, res) => {
   const { title, content, status, slug } = req.body;
+  const { slugg } = req.params;
 
-  validateFields([title, content, status, slug]);
+  console.log("I am update check", title, content, status, slugg);
 
-  const articleExist = await Article.findOne({ slug });
+  validateFields([title, content, status]);
+
+  const articleExist = await Article.findById(slugg);
   if (!articleExist) {
     throw new ApiError(400, "Post does not exists");
   }
@@ -90,10 +94,10 @@ const updatePost = asyncHandler(async (req, res) => {
   const imageUrl = articleExist.featuredImage;
   const publicId = imageUrl.split("/").pop().split(".")[0]; // Extract publicId from URL
 
-  const isImageDeleted = await deleteFileFromCloudinary(publicId);
-  if (!isImageDeleted) {
-    throw new ApiError(500, "Failed to delete image from Cloudinary");
-  }
+  // const isImageDeleted = await deleteFileFromCloudinary(publicId);
+  // if (!isImageDeleted) {
+  //   throw new ApiError(500, "Failed to delete image from Cloudinary");
+  // }
 
   const featuredImageLocalPath = req.file?.path;
   if (!featuredImageLocalPath) {
@@ -108,8 +112,8 @@ const updatePost = asyncHandler(async (req, res) => {
     );
   }
 
-  const article = await Article.findOneAndUpdate(
-    { slug },
+  const article = await Article.findByIdAndUpdate(
+    slugg,
     {
       $set: {
         title,
@@ -138,7 +142,7 @@ const deletePost = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Slug is needed");
   }
 
-  const article = await Article.findOne({ slug });
+  const article = await Article.findById(slug);
   if (!article) {
     throw new ApiError(400, "Post does not exists");
   }
@@ -160,7 +164,7 @@ const deletePost = asyncHandler(async (req, res) => {
     throw new ApiError(500, "Failed to delete image from Cloudinary");
   }
 
-  await Article.findOneAndDelete({ slug });
+  await Article.findByIdAndDelete(slug);
 
   // const articleExist = await Article.findOne({ slug });
   // if (articleExist) {
@@ -184,7 +188,7 @@ const getPost = asyncHandler(async (req, res) => {
   //   throw new ApiError(400, "Unathorized Request");
   // }
 
-  const article = await Article.findOne({ slug });
+  const article = await Article.findById(slug);
   if (!article) {
     throw new ApiError(400, "Post does not exists");
   }
@@ -195,9 +199,31 @@ const getPost = asyncHandler(async (req, res) => {
 });
 
 const getAllPosts = asyncHandler(async (req, res) => {
-  const query = req.query;
+  const posts = await Article.find({});
+  if (posts.length === 0) {
+    throw new ApiError(200, "Posts does not exists");
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, posts, "All posts fetched successfully"));
 });
 
-const getFilePreview = asyncHandler(async (req, res) => {});
+const getFilePreview = asyncHandler(async (req, res) => {
+  const user = req.user;
+  if (!user) {
+    throw new ApiError(400, "Unauthorized user");
+  }
 
-export { createPost, updatePost, deletePost, getPost };
+  const featuredImage = Article.findOne({ owner: user?._id }).featuredImage;
+
+  if (!featuredImage) {
+    throw new ApiError(400, "Image does not exists");
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, featuredImage, "Image fetched successfully"));
+});
+
+export { createPost, updatePost, deletePost, getPost, getAllPosts };
