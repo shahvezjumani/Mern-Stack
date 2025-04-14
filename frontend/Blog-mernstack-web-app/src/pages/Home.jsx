@@ -47,6 +47,7 @@ function Home() {
   }, []);
   return (
     <div className="py-8">
+      <h1>hello woeld</h1>
       {posts.length > 0 ? (
         <Container>
           <div className="flex gap-4">

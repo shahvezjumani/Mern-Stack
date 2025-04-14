@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
+import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import { Course } from "../models/course.model.js";
 
 const registerUser = asyncHandler(async (req, res) => {
   const { userName, email, password } = req.body;
@@ -139,4 +141,25 @@ const getCurrentUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, fetchedUser, "User fetched Successfully"));
 });
 
-export { registerUser, loginUser, logoutUser, getCurrentUser };
+const enrollCourse = asyncHandler(async (req, res) => {
+  const id = req.params?.id;
+  const userId = req.user?._id;
+
+  const course = await Course.findByIdAndUpdate(
+    id,
+    {
+      $push: {
+        enrolledStudents: userId,
+      },
+    },
+    {
+      new: true,
+    }
+  );
+
+  return res
+    .status(201)
+    .json(new ApiResponse(201, course, "user enrolled successfully"));
+});
+
+export { registerUser, loginUser, logoutUser, getCurrentUser, enrollCourse };

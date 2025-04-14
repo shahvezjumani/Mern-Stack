@@ -6,7 +6,6 @@ const userSchema = new Schema({
   userName: {
     type: String,
     required: true,
-    unique: true,
     trim: true,
   },
   email: {
@@ -19,6 +18,38 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  avatar: {
+    type: String,
+    default: "https://www.gravatar.com/avatar/?d=mp",
+  },
+  gender: {
+    type: String,
+    enum: ["Male", "Female", "Other"],
+    default: "Other",
+  },
+  enrolledCourses: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Course",
+    },
+  ],
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Comment",
+    },
+  ],
+  assignedAssignments: [
+    {
+      type: String,
+    },
+  ],
+  likes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Like",
+    },
+  ],
   refreshToken: {
     type: String,
   },

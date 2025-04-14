@@ -21,6 +21,8 @@ const App = () => {
         { withCredentials: true }
       )
       .then((res) => {
+        console.log("hh hiba");
+        
         dispatch(login(res.data.data));
       })
       .catch((err) => {
