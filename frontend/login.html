@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Login - Edu-content</title>
+
+  
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+  
+   <link rel="stylesheet" href="css/style.css">
+
+   <style>
+      .user-type {
+         margin-bottom: 1rem;
+      }
+      .user-type select {
+         width: 100%;
+         padding: 1rem;
+         border-radius: .5rem;
+         background-color: var(--light-bg);
+         font-size: 1.8rem;
+         color: var(--black);
+         border: var(--border);
+      }
+      
+      .error-message {
+         color: red;
+         margin-bottom: 1rem;
+         display: none;
+      }
+   </style>
+</head>
+<body>
+
+<header class="header">
+   <section class="flex">
+      <a href="home.html" class="logo">Edu-content</a>
+      <div class="icons">
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+   </section>
+</header>   
+
+<section class="form-container">
+   <form id="loginForm" method="post">
+      <h3>Login Now</h3>
+      <div class="user-type">
+         <select name="userType" id="userType" required>
+            <option value="">Select User Type</option>
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+         </select>
+      </div>
+      <p>Your Email <span>*</span></p>
+      <input type="email" name="email" id="email" placeholder="Enter your email" required maxlength="50" class="box">
+      <p>Your Password <span>*</span></p>
+      <input type="password" name="password" id="password" placeholder="Enter your password" required maxlength="20" class="box">
+      <div class="error-message" id="errorMessage"></div>
+      <input type="submit" value="Login" class="btn">
+      <p>Don't have an account? <a href="register.html">Register now</a></p>
+   </form>
+</section>
+
+<footer class="footer">
+   &copy; copyright @ 2024 by <span>Sindhi Programmers</span> | all rights reserved!
+</footer>
+
+
+<script>
+   document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const userType = document.getElementById('userType').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('errorMessage');
+      
+      
+      const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+      
+     
+      const user = storedUsers.find(u => 
+         u.email === email && 
+         u.password === password && 
+         u.userType === userType
+      );
+      
+      if (user) {
+        
+         localStorage.setItem('currentUser', JSON.stringify({
+            email: user.email,
+            userType: user.userType,
+            name: user.name
+         }));
+         
+         
+         if (userType === 'student') {
+            window.location.href = 'home.html';
+         } else if (userType === 'teacher') {
+            window.location.href = 'teacher_profile.html';
+         }
+      } else {
+         errorMessage.style.display = 'block';
+         errorMessage.textContent = 'Invalid credentials or user type!';
+      }
+   });
+</script>
+   
+</body>
+</html>
