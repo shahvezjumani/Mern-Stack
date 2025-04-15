@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>home</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
+   <!-- Chart.js CDN -->
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+   <style>
+      .chart-container {
+         position: relative;
+         height: 300px;
+         width: 100%;
+      }
+   </style>
+</head>
+<body>
+
+<header class="header">
+   
+   <section class="flex">
+
+      <a href="home.html" class="logo">Edu-content</a>
+
+      <form action="search.html" method="post" class="search-form">
+         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+         <button type="submit" class="fas fa-search"></button>
+      </form>
+
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+
+      <div class="profile">
+         <img src="images/pic-1.jpg" class="image" alt="">
+         <h3 class="name">SALU student</h3>
+         <p class="role">Khairpur</p>
+         <a href="profile.html" class="btn">view profile</a>
+         <div class="flex-btn">
+            <a href="login.html" class="option-btn">login</a>
+            <a href="register.html" class="option-btn">register</a>
+         </div>
+      </div>
+
+   </section>
+
+</header>   
+
+<div class="side-bar">
+
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+
+   <div class="profile">
+      <img src="images/pic-1.jpg" class="image" alt="">
+      <h3 class="name">SALU student</h3>
+      <p class="role">Khairpur</p>
+      <a href="profile.html" class="btn">view profile</a>
+   </div>
+
+   <nav class="navbar">
+      <a href="home.html"><i class="fas fa-home"></i><span>home</span></a>
+      <a href="about.html"><i class="fas fa-question"></i><span>about</span></a>
+      <a href="courses.html"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
+      <a href="teachers.html"><i class="fas fa-chalkboard-user"></i><span>teachers</span></a>
+      <a href="contact.html"><i class="fas fa-headset"></i><span>contact us</span></a>
+   </nav>
+
+</div>
+
+<section class="home-grid">
+
+   <h1 class="heading">quick options</h1>
+
+   <div class="box-container">
+
+      <div class="box">
+         <h3 class="title">Activity Overview</h3>
+         <div class="chart-container">
+            <canvas id="activityChart"></canvas>
+         </div>
+      </div>
+
+      <div class="box">
+         <h3 class="title">top categories</h3>
+         <div class="flex">
+            <a href="https://developer.mozilla.org/en-US/docs/Web/Development" target="_blank"><i class="fas fa-code"></i><span>development</span></a>
+            <a href="https://www.investopedia.com/business-essentials-4689818" target="_blank"><i class="fas fa-chart-simple"></i><span>business</span></a>
+            <a href="https://www.w3schools.com/graphics/default.asp" target="_blank"><i class="fas fa-pen"></i><span>design</span></a>
+            <a href="https://www.marketingprofs.com/" target="_blank"><i class="fas fa-chart-line"></i><span>marketing</span></a>
+            <a href="https://www.musictheory.net/" target="_blank"><i class="fas fa-music"></i><span>music</span></a>
+            <a href="https://photographylife.com/photography-tutorials" target="_blank"><i class="fas fa-camera"></i><span>photography</span></a>
+            <a href="https://docs.microsoft.com/en-us/software-development/" target="_blank"><i class="fas fa-cog"></i><span>software</span></a>
+            <a href="https://www.science.gov/" target="_blank"><i class="fas fa-vial"></i><span>science</span></a>
+         </div>
+      </div>
+
+      <div class="box">
+         <h3 class="title">popular topics</h3>
+         <div class="flex">
+            <a href="https://www.w3schools.com/html/" target="_blank"><i class="fab fa-html5"></i><span>HTML</span></a>
+            <a href="https://www.w3schools.com/css/" target="_blank"><i class="fab fa-css3"></i><span>CSS</span></a>
+            <a href="https://www.w3schools.com/js/" target="_blank"><i class="fab fa-js"></i><span>javascript</span></a>
+            <a href="https://reactjs.org/docs/getting-started.html" target="_blank"><i class="fab fa-react"></i><span>react</span></a>
+            <a href="https://www.php.net/docs.php" target="_blank"><i class="fab fa-php"></i><span>PHP</span></a>
+            <a href="https://getbootstrap.com/docs/" target="_blank"><i class="fab fa-bootstrap"></i><span>bootstrap</span></a>
+         </div>
+      </div>
+
+      <div class="box">
+         <h3 class="title">become a tutor</h3>
+         <p class="tutor">are you a teacher and want to share your knoledge with th world? you are at right place!</p>
+         <a href="teachers.html" class="inline-btn">get started</a>
+      </div>
+
+   </div>
+
+</section>
+
+
+
+<section class="courses">
+
+   <h1 class="heading">our courses</h1>
+
+   <div class="box-container">
+
+      <div class="box">
+         <div class="tutor">
+            <img src="images/pic-2.jpg" alt="">
+            <div class="info">
+               <h3>Web Dev Simplified</h3>
+               <span>HTML Playlist</span>
+            </div>
+         </div>
+         <div class="thumb">
+            <iframe width="100%" height="200" src="https://www.youtube.com/embed/videoseries?list=PLZlA0Gpn_vH8DWL14Wud_m8NeNNbYKOkj" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <span>12 videos</span>
+         </div>
+         <h3 class="title">HTML Crash Course</h3>
+         <a href="playlist.html?playlist=PLZlA0Gpn_vH8DWL14Wud_m8NeNNbYKOkj" class="inline-btn">view playlist</a>
+      </div>
+
+      <div class="box">
+         <div class="tutor">
+            <img src="images/pic-3.jpg" alt="">
+            <div class="info">
+               <h3>Traversy Media</h3>
+               <span>CSS Playlist</span>
+            </div>
+         </div>
+         <div class="thumb">
+            <iframe width="100%" height="200" src="https://www.youtube.com/embed/videoseries?list=PLillGF-RfqbYeckUaD1z6nviTp31GLTH8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <span>15 videos</span>
+         </div>
+         <h3 class="title">CSS Crash Course</h3>
+         <a href="playlist.html?playlist=PLillGF-RfqbYeckUaD1z6nviTp31GLTH8" class="inline-btn">view playlist</a>
+      </div>
+
+      <div class="box">
+         <div class="tutor">
+            <img src="images/pic-4.jpg" alt="">
+            <div class="info">
+               <h3>Academind</h3>
+               <span>JavaScript Playlist</span>
+            </div>
+         </div>
+         <div class="thumb">
+            <iframe width="100%" height="200" src="https://www.youtube.com/embed/videoseries?list=PL55RiY5tL51q4D-B63KBnyMCU-H5Rj1w" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <span>20 videos</span>
+         </div>
+         <h3 class="title">JavaScript Fundamentals</h3>
+         <a href="playlist.html?playlist=PL55RiY5tL51q4D-B63KBnyMCU-H5Rj1w" class="inline-btn">view playlist</a>
+      </div>
+
+      <div class="box">
+         <div class="tutor">
+            <img src="images/pic-5.jpg" alt="">
+            <div class="info">
+               <h3>Codevolution</h3>
+               <span>React Playlist</span>
+            </div>
+         </div>
+         <div class="thumb">
+            <iframe width="100%" height="200" src="https://www.youtube.com/embed/videoseries?list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <span>25 videos</span>
+         </div>
+         <h3 class="title">React Tutorial</h3>
+         <a href="playlist.html?playlist=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3" class="inline-btn">view playlist</a>
+      </div>
+
+      <div class="box">
+         <div class="tutor">
+            <img src="images/pic-6.jpg" alt="">
+            <div class="info">
+               <h3>The Net Ninja</h3>
+               <span>PHP Playlist</span>
+            </div>
+         </div>
+         <div class="thumb">
+            <iframe width="100%" height="200" src="https://www.youtube.com/embed/videoseries?list=PL4cUxeGkcC9gksOX3Kd9KPo-O68ncT05o" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <span>18 videos</span>
+         </div>
+         <h3 class="title">PHP Tutorial</h3>
+         <a href="playlist.html?playlist=PL4cUxeGkcC9gksOX3Kd9KPo-O68ncT05o" class="inline-btn">view playlist</a>
+      </div>
+
+      <div class="box">
+         <div class="tutor">
+            <img src="images/pic-7.jpg" alt="">
+            <div class="info">
+               <h3>Derek Banas</h3>
+               <span>Bootstrap Playlist</span>
+            </div>
+         </div>
+         <div class="thumb">
+            <iframe width="100%" height="200" src="https://www.youtube.com/embed/videoseries?list=PLGLfVvz_LVvSX7fVd4OUFp_ODd86H0ZIY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <span>10 videos</span>
+         </div>
+         <h3 class="title">Bootstrap Tutorial</h3>
+         <a href="playlist.html?playlist=PLGLfVvz_LVvSX7fVd4OUFp_ODd86H0ZIY" class="inline-btn">view playlist</a>
+      </div>
+
+   </div>
+
+   <div class="more-btn">
+      <a href="courses.html" class="inline-option-btn">view all courses</a>
+   </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer class="footer">
+
+   &copy; copyright @ 20224by <span>yasir-yaseen and team</span> | all rights reserved!
+
+</footer>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
+<script>
+   // Activity data
+   const activityData = {
+      labels: ['Likes', 'Comments', 'Playlists'],
+      datasets: [{
+         data: [25, 12, 4],
+         backgroundColor: [
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 206, 86, 0.7)'
+         ],
+         borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)'
+         ],
+         borderWidth: 1
+      }]
+   };
+
+   // Chart configuration
+   const config = {
+      type: 'pie',
+      data: activityData,
+      options: {
+         responsive: true,
+         maintainAspectRatio: false,
+         plugins: {
+            legend: {
+               position: 'bottom',
+               labels: {
+                  font: {
+                     size: 14
+                  }
+               }
+            },
+            tooltip: {
+               callbacks: {
+                  label: function(context) {
+                     const label = context.label || '';
+                     const value = context.raw || 0;
+                     return `${label}: ${value}`;
+                  }
+               }
+            }
+         }
+      }
+   };
+
+   // Create the chart
+   const ctx = document.getElementById('activityChart').getContext('2d');
+   new Chart(ctx, config);
+</script>
+
+   
+</body>
+</html>
