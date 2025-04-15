@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Playlist - Edu-content</title>
+
+  
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   
+   <link rel="stylesheet" href="css/style.css">
+
+   <style>
+      .playlist-container {
+         display: grid;
+         grid-template-columns: 2fr 1fr;
+         gap: 2rem;
+         margin: 2rem;
+         padding: 2rem;
+         background: var(--white);
+         border-radius: .5rem;
+      }
+      .video-container {
+         background: var(--white);
+         border-radius: .5rem;
+         padding: 1rem;
+      }
+      .video-list {
+         background: var(--light-bg);
+         border-radius: .5rem;
+         padding: 1rem;
+         max-height: 600px;
+         overflow-y: auto;
+      }
+      .video-item {
+         display: flex;
+         align-items: center;
+         gap: 1rem;
+         margin-bottom: 1rem;
+         padding: 1rem;
+         border-radius: .5rem;
+         background: var(--white);
+         cursor: pointer;
+         transition: all .3s ease;
+      }
+      .video-item:hover {
+         transform: translateX(10px);
+         background: var(--light-bg);
+      }
+      .video-item.active {
+         background: var(--light-bg);
+         border-left: 5px solid var(--main-color);
+      }
+      .video-item img {
+         width: 120px;
+         border-radius: .5rem;
+      }
+      .video-info {
+         flex: 1;
+      }
+      .video-info h3 {
+         font-size: 1.6rem;
+         color: var(--black);
+         margin-bottom: .5rem;
+         display: -webkit-box;
+         -webkit-line-clamp: 2;
+         -webkit-box-orient: vertical;
+         overflow: hidden;
+      }
+      .video-info p {
+         font-size: 1.4rem;
+         color: var(--light-color);
+      }
+      .main-video {
+         width: 100%;
+         height: 500px;
+         border-radius: .5rem;
+      }
+      .playlist-title {
+         font-size: 2rem;
+         color: var(--black);
+         margin-bottom: 1rem;
+         padding: 1rem;
+         background: var(--light-bg);
+         border-radius: .5rem;
+      }
+   </style>
+</head>
+<body>
+
+<header class="header">
+   <section class="flex">
+      <a href="home.html" class="logo">Edu-content</a>
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+   </section>
+</header>   
+
+<div class="side-bar">
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+   <div class="profile">
+      <img src="images/pic-1.jpg" class="image" alt="">
+      <h3 class="name">SIBA student</h3>
+      <p class="role">Khairpur</p>
+      <a href="profile.html" class="btn">view profile</a>
+   </div>
+   <nav class="navbar">
+      <a href="home.html"><i class="fas fa-home"></i><span>home</span></a>
+      <a href="about.html"><i class="fas fa-question"></i><span>about</span></a>
+      <a href="courses.html"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
+      <a href="teachers.html"><i class="fas fa-chalkboard-user"></i><span>teachers</span></a>
+      <a href="contact.html"><i class="fas fa-headset"></i><span>contact us</span></a>
+   </nav>
+</div>
+
+<section class="playlist-container">
+   <div class="video-container">
+      <h3 class="playlist-title" id="playlistTitle">Loading playlist...</h3>
+      <iframe id="mainVideo" class="main-video" frameborder="0" allowfullscreen></iframe>
+   </div>
+   <div class="video-list" id="videoList">
+      
+      <div class="video-item">Loading videos...</div>
+   </div>
+</section>
+
+<footer class="footer">
+   &copy; copyright @ 2024 by <span>Sindhi Programs</span> | all rights reserved!
+</footer>
+
+<script>
+  
+   const playlists = {
+      'PLZlA0Gpn_vH8DWL14Wud_m8NeNNbYKOkj': {
+         title: 'HTML Crash Course',
+         videos: [
+            { id: 'ok-plXXHlWw', title: 'HTML Full Course - Build a Website Tutorial', thumbnail: 'https://i.ytimg.com/vi/ok-plXXHlWw/mqdefault.jpg' },
+            { id: 'UB1O30fR-EE', title: 'HTML Crash Course For Absolute Beginners', thumbnail: 'https://i.ytimg.com/vi/UB1O30fR-EE/mqdefault.jpg' },
+            { id: 'pQN-pnXPaVg', title: 'HTML Full Course - Build a Website Tutorial', thumbnail: 'https://i.ytimg.com/vi/pQN-pnXPaVg/mqdefault.jpg' },
+            { id: 'qz0aGYrrlhU', title: 'HTML Tutorial for Beginners: HTML Crash Course', thumbnail: 'https://i.ytimg.com/vi/qz0aGYrrlhU/mqdefault.jpg' },
+            { id: 'kUMe1FH4CHE', title: 'Learn HTML - Full Tutorial for Beginners', thumbnail: 'https://i.ytimg.com/vi/kUMe1FH4CHE/mqdefault.jpg' },
+            { id: 'PlxWf493en4', title: 'HTML Tutorial - How to Make a Super Simple Website', thumbnail: 'https://i.ytimg.com/vi/PlxWf493en4/mqdefault.jpg' }
+         ]
+      },
+      'PLillGF-RfqbYeckUaD1z6nviTp31GLTH8': {
+         title: 'CSS Crash Course',
+         videos: [
+            { id: 'yfoY53QXEnI', title: 'CSS Crash Course For Absolute Beginners', thumbnail: 'https://i.ytimg.com/vi/yfoY53QXEnI/mqdefault.jpg' },
+            { id: '1Rs2ND1ryYc', title: 'CSS Tutorial - Zero to Hero (Complete Course)', thumbnail: 'https://i.ytimg.com/vi/1Rs2ND1ryYc/mqdefault.jpg' },
+            { id: 'ieTHC78giGQ', title: 'CSS Full Course - Includes Flexbox and CSS Grid Tutorials', thumbnail: 'https://i.ytimg.com/vi/ieTHC78giGQ/mqdefault.jpg' },
+            { id: 'OXGznpKZ_sA', title: 'CSS Tutorial - Full Course for Beginners', thumbnail: 'https://i.ytimg.com/vi/OXGznpKZ_sA/mqdefault.jpg' },
+            { id: 'D-h8L5hgW-w', title: 'CSS Layout Masterclass - Grid, Flexbox, and Custom Properties', thumbnail: 'https://i.ytimg.com/vi/D-h8L5hgW-w/mqdefault.jpg' },
+            { id: 'K74l26pE4YA', title: 'CSS Flexbox Tutorial for Beginners', thumbnail: 'https://i.ytimg.com/vi/K74l26pE4YA/mqdefault.jpg' }
+         ]
+      },
+      'PL55RiY5tL51q4D-B63KBnyMCU-H5Rj1w': {
+         title: 'JavaScript Fundamentals',
+         videos: [
+            { id: 'PkZNo7MFNFg', title: 'Learn JavaScript - Full Course for Beginners', thumbnail: 'https://i.ytimg.com/vi/PkZNo7MFNFg/mqdefault.jpg' },
+            { id: 'W6NZfCO5SIk', title: 'JavaScript Tutorial for Beginners: Learn JavaScript in 1 Hour', thumbnail: 'https://i.ytimg.com/vi/W6NZfCO5SIk/mqdefault.jpg' },
+            { id: 'jS4aFq5-91M', title: 'JavaScript Programming - Full Course', thumbnail: 'https://i.ytimg.com/vi/jS4aFq5-91M/mqdefault.jpg' },
+            { id: 'hdI2bqOjy3c', title: 'JavaScript Crash Course For Beginners', thumbnail: 'https://i.ytimg.com/vi/hdI2bqOjy3c/mqdefault.jpg' },
+            { id: 'Qqx_wzMmFeA', title: 'JavaScript Tutorial for Beginners - Full Course in 8 Hours', thumbnail: 'https://i.ytimg.com/vi/Qqx_wzMmFeA/mqdefault.jpg' },
+            { id: 'lI1ae4REbFM', title: 'JavaScript DOM Manipulation – Full Course for Beginners', thumbnail: 'https://i.ytimg.com/vi/lI1ae4REbFM/mqdefault.jpg' }
+         ]
+      },
+      'PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3': {
+         title: 'React Tutorial',
+         videos: [
+            { id: 'QFaFIcGhPoM', title: 'React JS Crash Course', thumbnail: 'https://i.ytimg.com/vi/QFaFIcGhPoM/mqdefault.jpg' },
+            { id: 'w7ejDZ8SWv8', title: 'React JS Crash Course 2021', thumbnail: 'https://i.ytimg.com/vi/w7ejDZ8SWv8/mqdefault.jpg' },
+            { id: 'bMknfKXIFA8', title: 'React Course - Beginner\'s Tutorial for React JavaScript Library [2022]', thumbnail: 'https://i.ytimg.com/vi/bMknfKXIFA8/mqdefault.jpg' },
+            { id: '4UZrsTqkcW4', title: 'Full React Course 2020 - Learn Fundamentals, Hooks, Context API, React Router, Custom Hooks', thumbnail: 'https://i.ytimg.com/vi/4UZrsTqkcW4/mqdefault.jpg' },
+            { id: 'RVFAyFWO4go', title: 'React JS Tutorial - Basic to Advanced', thumbnail: 'https://i.ytimg.com/vi/RVFAyFWO4go/mqdefault.jpg' },
+            { id: 'f55qeKGgB_M', title: 'React State Management Tutorial', thumbnail: 'https://i.ytimg.com/vi/f55qeKGgB_M/mqdefault.jpg' }
+         ]
+      },
+      'PL4cUxeGkcC9gksOX3Kd9KPo-O68ncT05o': {
+         title: 'PHP Tutorial',
+         videos: [
+            { id: '2eebptXfEvw', title: 'PHP For Absolute Beginners', thumbnail: 'https://i.ytimg.com/vi/2eebptXfEvw/mqdefault.jpg' },
+            { id: 'OK_JCtrrv-c', title: 'PHP Programming Language Tutorial - Full Course', thumbnail: 'https://i.ytimg.com/vi/OK_JCtrrv-c/mqdefault.jpg' },
+            { id: 'BUCiSSyIGGU', title: 'PHP For Beginners | 3+ Hour Crash Course', thumbnail: 'https://i.ytimg.com/vi/BUCiSSyIGGU/mqdefault.jpg' },
+            { id: 'zZ6vybT1HQs', title: 'PHP Tutorial for Beginners - Full Course | MYSQL', thumbnail: 'https://i.ytimg.com/vi/zZ6vybT1HQs/mqdefault.jpg' },
+            { id: 'XBj_le81sAc', title: 'PHP OOP Tutorial', thumbnail: 'https://i.ytimg.com/vi/XBj_le81sAc/mqdefault.jpg' },
+            { id: 'ZdP0KM49IVk', title: 'Build PHP REST API From Scratch', thumbnail: 'https://i.ytimg.com/vi/ZdP0KM49IVk/mqdefault.jpg' }
+         ]
+      },
+      'PLGLfVvz_LVvSX7fVd4OUFp_ODd86H0ZIY': {
+         title: 'Bootstrap Tutorial',
+         videos: [
+            { id: '5GcQtLDGXy8', title: 'Bootstrap CSS Framework - Full Course for Beginners', thumbnail: 'https://i.ytimg.com/vi/5GcQtLDGXy8/mqdefault.jpg' },
+            { id: 'Jyvffr3aCp0', title: 'Bootstrap 5 Crash Course', thumbnail: 'https://i.ytimg.com/vi/Jyvffr3aCp0/mqdefault.jpg' },
+            { id: '4sosXZsdy-s', title: 'Bootstrap 5 Tutorial for Beginners', thumbnail: 'https://i.ytimg.com/vi/4sosXZsdy-s/mqdefault.jpg' },
+            { id: 'rH1RTwaAeGc', title: 'Learn Bootstrap 5 and SASS - Full Course for Beginners', thumbnail: 'https://i.ytimg.com/vi/rH1RTwaAeGc/mqdefault.jpg' },
+            { id: 'c9B4TPnak1A', title: 'Bootstrap 5 Crash Course | Website Build & Deploy', thumbnail: 'https://i.ytimg.com/vi/c9B4TPnak1A/mqdefault.jpg' },
+            { id: 'MxOUHg13wIg', title: 'Bootstrap 5 Components Tutorial', thumbnail: 'https://i.ytimg.com/vi/MxOUHg13wIg/mqdefault.jpg' }
+         ]
+      }
+   };
+
+   // Get playlist ID from URL
+   const urlParams = new URLSearchParams(window.location.search);
+   const playlistId = urlParams.get('playlist');
+
+   // Function to display videos
+   function displayPlaylist() {
+      const playlist = playlists[playlistId];
+      
+      if (!playlist) {
+         window.location.href = 'home.html';
+         return;
+      }
+
+      // Set playlist title
+      document.getElementById('playlistTitle').textContent = playlist.title;
+
+      // Set first video as main video
+      const mainVideo = document.getElementById('mainVideo');
+      mainVideo.src = `https://www.youtube.com/embed/${playlist.videos[0].id}`;
+
+      // Display video list
+      const videoList = document.getElementById('videoList');
+      videoList.innerHTML = playlist.videos.map((video, index) => `
+         <div class="video-item ${index === 0 ? 'active' : ''}" onclick="changeVideo('${video.id}', this)">
+            <img src="${video.thumbnail}" alt="${video.title}">
+            <div class="video-info">
+               <h3>${video.title}</h3>
+            </div>
+         </div>
+      `).join('');
+   }
+
+   // Function to change video
+   function changeVideo(videoId, element) {
+      const mainVideo = document.getElementById('mainVideo');
+      mainVideo.src = `https://www.youtube.com/embed/${videoId}`;
+
+      // Update active class
+      document.querySelectorAll('.video-item').forEach(item => item.classList.remove('active'));
+      element.classList.add('active');
+   }
+
+   // Initialize
+   if (playlistId) {
+      displayPlaylist();
+   } else {
+      window.location.href = 'home.html';
+   }
+
+   // Menu toggle functionality
+   document.querySelector('#menu-btn').onclick = () => {
+      document.querySelector('.side-bar').classList.toggle('active');
+   };
+
+   document.querySelector('#close-btn').onclick = () => {
+      document.querySelector('.side-bar').classList.remove('active');
+   };
+</script>
+
+</body>
+</html>
